@@ -1,0 +1,17 @@
+button {
+    text-decoration: none;
+    background: none;
+    padding: 0;
+    border:0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: rgba(59, 41, 175, 0.3);
+    color: #fff;
+    padding: 1rem;
+    border-radius:.25rem;
+    @include transition();
+    &.active {
+        background-color: rgba(59, 41, 175, 1);
+    }
+}

@@ -1,0 +1,8 @@
+// Animation Transition
+@mixin transition($args: all .25s ease) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+  }

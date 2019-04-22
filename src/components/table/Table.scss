@@ -1,0 +1,39 @@
+.Table {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    .table-inner {
+        overflow-x: scroll;
+    }
+    .fixed-table {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        .row {
+            padding: 15px;
+            margin-left: -15px;
+            border-right: solid 2px #000; 
+            border-radius: .25rem 0px 0px .25rem;
+            min-width: 100px;
+            .row-item {
+                min-width: 80px;
+            }
+        }
+    }
+    .row {
+        padding: 15px 0px;
+        margin: 0px 10px;
+        border-radius: .25rem;
+        width: fit-content;
+        position: relative;
+        .row-item {
+            width: 100%;
+            text-align: left;
+            margin: 0px 10px;
+            min-width: 113px;
+        }
+    }
+    .scroll-row {
+        padding-left: 130px!important;
+    }
+}

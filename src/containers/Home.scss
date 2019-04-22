@@ -1,0 +1,15 @@
+@import "./../styles/base";
+
+.teams {
+    .slab {
+        &::after {
+            content: '';
+            width: 4px;
+            margin: 0 auto;
+            height: 100%;
+            display: block;
+            background-color: #000;
+            transform: rotate(15deg);
+        }
+    }
+}
