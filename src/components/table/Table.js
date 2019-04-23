@@ -11,14 +11,15 @@ class Table extends Component {
 
     renderFixRow(n, i) {
         return(
-            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6'}`}>
+            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6 blue'}`}>
                 <span className="row-item first">{n["first_name"]}</span>
             </div>
         )
     }
+
     renderRow(m, i) {
         return(
-            <div className={`row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6'}`}>
+            <div className={`${(i===0)&&'fw7 f6 blue'} row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6'}`}>
                 <span className="row-item">{m["last_name"]}</span>
                 <span className="row-item">{m["points"]}</span>
                 <span className="row-item">{m["ppg"]}</span>

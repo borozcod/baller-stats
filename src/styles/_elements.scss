@@ -6,12 +6,22 @@ button {
     cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-color: rgba(59, 41, 175, 0.3);
-    color: #fff;
-    padding: 1rem;
-    border-radius:.25rem;
     @include transition();
-    &.active {
-        background-color: rgba(59, 41, 175, 1);
+    // background-color: rgba(59, 41, 175, 0.3);
+    // color: #fff;
+    // padding: 1rem;
+    // border-radius:.25rem;
+    // &.active {
+    //     background-color: rgba(59, 41, 175, 1);
+    // }
+}
+
+.toggle {
+    button {
+        border-bottom: solid 0px $blue;
+        padding-bottom: 4px;
+        &.active {
+            border-bottom: solid 3px $blue;
+        }
     }
 }

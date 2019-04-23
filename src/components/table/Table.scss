@@ -9,10 +9,13 @@
         position: absolute;
         left: 0px;
         top: 0px;
+        z-index: 2;
+        box-shadow: 3px 2px 6px 0px #c0c0c0;
+        border-right: solid 2px #000;
         .row {
             padding: 15px;
             margin-left: -15px;
-            border-right: solid 2px #000; 
+            margin-right: 0px;
             border-radius: .25rem 0px 0px .25rem;
             min-width: 100px;
             .row-item {
