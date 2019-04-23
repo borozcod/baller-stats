@@ -21,7 +21,7 @@ Make sure you have your api server running on port `8082`. If it is more conveni
 To keep things consistent, each component should have its own folder inside the components folder. Look at the `card` folder for example.
 
 ### Styles
-For most of the styles, I use classes from the https://tachyons.io library. You can find any style you need from the [table of style](https://tachyons.io/docs/table-of-styles/ "table of style").  If your component needs custom that falls outside of the tachyons library then create a `scss` file inside that component directory. To utilize all of the base sass variables make sure to add an `@import` statement that refers to `_base.scss` found in teh `/styles` directory.
+For most of the styles, I use classes from the https://tachyons.io library. You can find any style you need from the [table of style](https://tachyons.io/docs/table-of-styles/ "table of style").  If your component needs custom styles that fall outside of the tachyons library then create a `scss` file inside that component directory. To utilize all of the base sass variables make sure to add an `@import` statement that refers to `_base.scss` found in the `/styles` directory.
 Example:
 ```
 @import "./../../styles/base";
@@ -32,4 +32,4 @@ Even with custom styles, try and keep things consistent with tachyons.
 If you think you might use some piece of logit twice, odds are you will. Just add it to the `functions.js` file found inside `/src`,  add an export statement at the beginning of it. You can take a look at some of the functions that are already in there.
 
 ## Your First Issue
-You got the app running now what. Pick an [issue](https://github.com/borozcod/baller-stats/issues "issue") and lets get to work. Make sure to assign the issue to yourself. Make a branch for that specific issue with your two initials and the issue number. Example `bo/issue-1`. Once you think your branch is ready to be merged, create a pull request and make sure to state `Fixes #1` with the issue number being your own. This is important since it will help us keep track of things and link issues with pull request. 
+You got the app running now what. Pick an [issue](https://github.com/borozcod/baller-stats/issues "issue") and lets get to work. Make sure to assign the issue to yourself. Make a branch for that specific issue with your two initials and the issue number. Example `bo/issue-1`. Once you think your branch is ready to be merged, create a pull request and make sure to add `Fixes #1` on the pull request description, with the issue number being your own. This is important since it will help us keep track of things and link issues with pull request. 
