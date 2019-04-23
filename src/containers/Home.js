@@ -5,7 +5,6 @@ import {
  } from "./../functions";
 import Card  from "./../components/card/Card";
 import Table  from "./../components/table/Table";
-
 import './Home.scss';
 
 
