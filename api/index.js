@@ -13,6 +13,3 @@ routes(app);
 
 app.listen(port);
 console.log('App listening on port ' + port);
-
-const sheets = require('./methods/getTeams.js');
-sheets.getTeams();
