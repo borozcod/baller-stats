@@ -51,7 +51,7 @@ class Table extends Component {
 
     renderFixRow(n, i) {
         return(
-            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-light-gray':'bg-white'}`} key={i}>
+            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-white':'bg-light-gray'}`} key={i}>
                 <span className="row-item first">{n["first_name"]}</span>
             </div>
         )
@@ -59,7 +59,7 @@ class Table extends Component {
 
     renderRow(m, i) {
         return(
-            <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-light-gray':'bg-white'} `} key={i}>
+            <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-white':'bg-light-gray'} `} key={i}>
                 <span className="row-item">{m["last_name"]}</span>
                 <span className="row-item">{m["points"]}</span>
                 <span className="row-item">{m["ppg"]}</span>
@@ -99,12 +99,12 @@ class Table extends Component {
                     
                         <div className="table-inner">
                         <div className="fixed-table">
-                            <div className="row flex justify-between mv2 relative z-2 bg-light-gray fw7 f6 blue">
+                            <div className="row flex justify-between mv2 relative z-2 fw7 f6 top-bar">
                                 <span className="row-item first">First</span>
                             </div>
                             {names.map(this.renderFixRow)}
                         </div>
-                        <div className="fw7 f6 blue row scroll-row flex justify-between mv2 relative z-1 bg-light-gray fw7 f6">
+                        <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
                                 <span className="row-item">Last</span>
                                 <span className="row-item">Points</span>
                                 <span className="row-item">PPG</span>
