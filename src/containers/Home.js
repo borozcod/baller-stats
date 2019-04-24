@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { 
-    getTeams,
-    getMembers
- } from "./../functions";
+import { getTeams } from "./../functions";
 import Card  from "./../components/card/Card";
 import Table  from "./../components/table/Table";
 import './Home.scss';
@@ -25,20 +22,11 @@ class Home extends Component {
             this.setState({teams: res.data.teams});
         });
 
-        getMembers().then((res) => {
-            this.setState({
-                members: res.data.members,
-                names: res.data.names
-            });
-        });
-        
     }
 
     render() {
         const {
             teams,
-            members,
-            names,
             toggle
         } = this.state;
         
@@ -58,9 +46,9 @@ class Home extends Component {
                 </div>
                 <div className={`teams ${(toggle === 'teams')? 'db': 'dn'}`}>
                 {
-                    teams.map((t) => {
+                    teams.map((t, i) => {
                         return(
-                            <Card>
+                            <Card key={i}>
                                 <h1 className="mt0">{ t.name }</h1> 
                                 <div className="flex justify-between mw4 mr-auto ml-auto">
                                     <div className="wins tc">
@@ -79,10 +67,7 @@ class Home extends Component {
                 }
                 </div>
                 <div className={`players ${(toggle === 'players')? 'db': 'dn'}`}>
-                    <Table
-                        members={members}
-                        names={names}
-                    />
+                    <Table />
                 </div>
             </div>
         );

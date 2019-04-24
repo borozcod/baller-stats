@@ -1,7 +1,7 @@
 const {authorize, google} = require('./../config.js');
+const { SHEET_ID } = require('./../variables.js');
 const fs = require('fs');
 
-let SHEET_ID = "1ZH0iP01IQQHFsQy4LUyOQkMVICQIXtZLaVxt3rBOmb0";
 const range = {
     "1": "Just Du It!A2:S",
     "2": "Clay-mores!A2:C7",

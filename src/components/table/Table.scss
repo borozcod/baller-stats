@@ -1,3 +1,5 @@
+@import "./../../styles/base";
+
 .Table {
     max-width: 800px;
     margin: 0 auto;
@@ -16,7 +18,7 @@
             padding: 15px;
             margin-left: 0px;
             margin-right: 0px;
-            border-radius: .25rem 0px 0px .25rem;
+            border-radius: $radius 0px 0px $radius;
             min-width: 100px;
             .row-item {
                 min-width: 80px;
@@ -26,7 +28,7 @@
     .row {
         padding: 15px 0px;
         margin: 0px 10px;
-        border-radius: .25rem;
+        border-radius: $radius;
         width: fit-content;
         position: relative;
         .row-item {
@@ -38,5 +40,27 @@
     }
     .scroll-row {
         padding-left: 130px!important;
+    }
+}
+
+.table-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 320px;
+    margin: 0 auto 20px auto;
+    .search-icon {
+        position: absolute;
+        left: 15px;
+        color: #dbdbdb;
+    }
+    input {
+        border: solid 2px #dbdbdb;
+        border-radius: $radius;
+        padding: 10px 15px 10px 40px;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
     }
 }

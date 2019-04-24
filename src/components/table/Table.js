@@ -1,17 +1,58 @@
 import React, { Component } from 'react';
+import { getMembers } from "./../../functions";
 import './Table.scss';
 
 class Table extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            members: [],
+            names: [],
+            value: ''
+        }
+
+        this.all_members = [];
+
         this.renderRow = this.renderRow.bind(this)
         this.renderFixRow = this.renderFixRow.bind(this)
+        this.handleSearch = this.handleSearch.bind(this)
+    }
+
+    componentDidMount() {
+        getMembers().then((res) => {
+            this.setState({
+                members: res.data.members,
+                names: res.data.names
+            });
+
+            this.all_members = res.data.members;
+        });
+    }
+
+    handleSearch(e) {
+        const value = e.target.value;
+
+        this.setState({
+            value
+        })
+        
+        const isMatch = (obj) => {
+            return obj.first_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 || obj.last_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
+        }
+
+        const filter_members = this.all_members.filter(isMatch)
+
+        this.setState({
+            members: filter_members,
+            names: filter_members
+
+        })
     }
 
     renderFixRow(n, i) {
         return(
-            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6 blue'}`}>
+            <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-light-gray':'bg-white'}`} key={i}>
                 <span className="row-item first">{n["first_name"]}</span>
             </div>
         )
@@ -19,7 +60,7 @@ class Table extends Component {
 
     renderRow(m, i) {
         return(
-            <div className={`${(i===0)&&'fw7 f6 blue'} row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-light-gray':'bg-white'} ${(i===0)&&'fw7 f6'}`}>
+            <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-light-gray':'bg-white'} `} key={i}>
                 <span className="row-item">{m["last_name"]}</span>
                 <span className="row-item">{m["points"]}</span>
                 <span className="row-item">{m["ppg"]}</span>
@@ -44,16 +85,46 @@ class Table extends Component {
     render() {
         const {
             members,
-            names
-        } = this.props
+            names,
+            value
+        } = this.state
         
         return(
-            <div className="Table">
-                <div className="table-inner">
-                    <div className="fixed-table">
-                        {names.map(this.renderFixRow)}
+            <div className="mh4-ns mh2">
+                <div className="table-search">
+                    <input type="text" placeholder="Search By Name" value={value} onChange={this.handleSearch} />
+                    <i className="fas fa-search search-icon"></i>
+                </div>
+                <div className="Table">
+                    
+                        <div className="table-inner">
+                        <div className="fixed-table">
+                            <div className="row flex justify-between mv2 relative z-2 bg-light-gray fw7 f6 blue">
+                                <span className="row-item first">First</span>
+                            </div>
+                            {names.map(this.renderFixRow)}
+                        </div>
+                        <div className="fw7 f6 blue row scroll-row flex justify-between mv2 relative z-1 bg-light-gray fw7 f6">
+                                <span className="row-item">Last</span>
+                                <span className="row-item">Points</span>
+                                <span className="row-item">PPG</span>
+                                <span className="row-item">FG%</span>
+                                <span className="row-item">3PT%</span>
+                                <span className="row-item">FT%</span>
+                                <span className="row-item">2pt Made</span>
+                                <span className="row-item">2pt Attempted</span>
+                                <span className="row-item">3pt Made</span>
+                                <span className="row-item">3pt Attempted</span>
+                                <span className="row-item">FT mades</span>
+                                <span className="row-item">FT Attempted</span>
+                                <span className="row-item">Rebounds</span>
+                                <span className="row-item">Assists</span>
+                                <span className="row-item">Steals</span>
+                                <span className="row-item">Blocks</span>
+                                <span className="row-item">Fouls</span>
+                        </div>
+                        {members.map(this.renderRow)}
                     </div>
-                    {members.map(this.renderRow)}
                 </div>
             </div>
         )

@@ -1,8 +1,8 @@
 const {authorize, google} = require('./../config.js');
+const { SHEET_ID } = require('./../variables.js');
 const fs = require('fs');
 
-let SHEET_ID = "1ZH0iP01IQQHFsQy4LUyOQkMVICQIXtZLaVxt3rBOmb0";
-let RANGE = "League Leaders!A1:S";
+let RANGE = "League Leaders!A2:S";
 
 
 const getMembers = () => {
