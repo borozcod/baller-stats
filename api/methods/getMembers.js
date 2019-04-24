@@ -2,7 +2,7 @@ const {authorize, google} = require('./../config.js');
 const { SHEET_ID } = require('./../variables.js');
 const fs = require('fs');
 
-let RANGE = "League Leaders!A2:S";
+let RANGE = "League Leaders!A2:T";
 
 
 const getMembers = () => {
@@ -23,6 +23,7 @@ const getMembers = () => {
                       members: [],
                       names:[]
                   }
+
                   if (rows.length) {
                     rows.map((row) => {
 
@@ -37,14 +38,16 @@ const getMembers = () => {
                             "2pt_made": row[7],
                             "2pt_attempted": row[8],
                             "3pt_made": row[9],
-                            "ft_mades": row[10],
-                            "ft_attempted": row[11],
-                            "rebounds": row[12],
-                            "assists": row[13],
-                            "steals": row[14],
-                            "blocks": row[15],
-                            "fouls": row[16],
-                            "games_played": row[17]
+                            "3pt_attempted": row[10],
+                            "ft_mades": row[11],
+                            "ft_attempted": row[12],
+                            "rebounds": row[13],
+                            "assists": row[14],
+                            "steals": row[15],
+                            "blocks": row[16],
+                            "fouls": row[17],
+                            "games_played": row[18],
+                            "team_name": row[19]
                         }
 
                         const name = {

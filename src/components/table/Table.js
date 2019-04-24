@@ -25,7 +25,6 @@ class Table extends Component {
                 members: res.data.members,
                 names: res.data.names
             });
-
             this.all_members = res.data.members;
         });
     }
@@ -38,7 +37,7 @@ class Table extends Component {
         })
         
         const isMatch = (obj) => {
-            return obj.first_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 || obj.last_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
+            return obj.first_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1 || obj.last_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1  || obj.team_name.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1
         }
 
         const filter_members = this.all_members.filter(isMatch)
@@ -70,6 +69,7 @@ class Table extends Component {
                 <span className="row-item">{m["2pt_made"]}</span>
                 <span className="row-item">{m["2pt_attempted"]}</span>
                 <span className="row-item">{m["3pt_made"]}</span>
+                <span className="row-item">{m["3pt_attempted"]}</span>
                 <span className="row-item">{m["ft_mades"]}</span>
                 <span className="row-item">{m["ft_attempted"]}</span>
                 <span className="row-item">{m["rebounds"]}</span>
@@ -122,6 +122,7 @@ class Table extends Component {
                                 <span className="row-item">Steals</span>
                                 <span className="row-item">Blocks</span>
                                 <span className="row-item">Fouls</span>
+                                <span className="row-item">Games Played</span>
                         </div>
                         {members.map(this.renderRow)}
                     </div>
