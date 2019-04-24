@@ -92,7 +92,7 @@ class Table extends Component {
         return(
             <div className="mh4-ns mh2">
                 <div className="table-search">
-                    <input type="text" placeholder="Search By Name" value={value} onChange={this.handleSearch} />
+                    <input type="text" placeholder="Search by Name or Team" value={value} onChange={this.handleSearch} />
                     <i className="fas fa-search search-icon"></i>
                 </div>
                 <div className="Table">
