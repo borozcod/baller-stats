@@ -4,9 +4,19 @@ First and foremost, thank you for helping. Baller Stats is a simple application 
 ## API
 Everything inside the `/api` directory. In here is a node app used to get data from a google sheet and return it as json. To get working on the API the are a few steps. Before running any of these steps make sure you are in the api directory by running `cd api`.
 
-1. You will need a `secret.json` file. Since some of that information is tied to my Google account you will have to reach out to [me](mailto:bryanorozcoweb@gmail.com "me") to get it. 
-2. Install the npm packages. Run `npm install`.
-3. Run `npm run start`.
+1. Create a `config.js` file inside the root of the `api` directory. Paste in the following:
+```
+const PORT = 8083;
+
+module.exports = {
+    PORT
+};
+```
+Feel free to change the port to a different one if needed.
+
+2. You will need a `secret.json` file. Since some of that information is tied to my Google account you will have to reach out to [me](mailto:bryanorozcoweb@gmail.com "me") to get it. 
+3. Install the npm packages. Run `npm install`.
+4. Run `npm run start`.
 
 ## Client
 The client is found in the root of this project. It is basically a `create-react-app` with some small configurations. Here are the steps to get the client running.
@@ -15,7 +25,7 @@ The client is found in the root of this project. It is basically a `create-react
 2. From the project root directory run `yarn install`.
 3. Start the app by running `yarn start`. 
 
-Make sure you have your api server running on port `8082`. If it is more convenient you can also change `API_URL` to the live api of `http://api.ballerstats.com`.
+Make sure you have your api server running on the port specified inside `/api/config.js`. If it is more convenient you can also change `API_URL` to the live api of `http://api.ballerstats.com`.
 
 ### Components
 To keep things consistent, each component should have its own folder inside the components folder. Look at the `card` folder for example.
