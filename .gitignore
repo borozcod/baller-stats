@@ -25,6 +25,7 @@ yarn-error.log*
 
 # CONFIG
 src/config.js
+api/config.js
 
 # API
 secret.json

@@ -4,7 +4,8 @@ var bodyParser = require('body-parser')
 var routes = require('./routes.js');
 var cors = require('cors');
 var path = require('path');
-var port = 8082;
+const { PORT } = require('./config.js');
+var port = PORT;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
