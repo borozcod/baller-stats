@@ -12,7 +12,7 @@ class Home extends Component {
             teams: [],
             members: [],
             names: [],
-            toggle: 'teams'
+            toggle: 'players'
         }
     }
 

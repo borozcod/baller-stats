@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getMembers } from "./../../functions";
+import _ from 'lodash';
 import './Table.scss';
 
 class Table extends Component {
@@ -9,21 +10,27 @@ class Table extends Component {
         this.state = {
             members: [],
             names: [],
+            fields: [],
             value: ''
         }
 
         this.all_members = [];
+        this.prevSort = null;
+        this.sortOrder = false;
 
         this.renderRow = this.renderRow.bind(this)
         this.renderFixRow = this.renderFixRow.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.sortTable = this.sortTable.bind(this)
+        this.renderField = this.renderField.bind(this)
     }
 
     componentDidMount() {
         getMembers().then((res) => {
             this.setState({
                 members: res.data.members,
-                names: res.data.names
+                names: res.data.names,
+                fields: res.data.fields,
             });
             this.all_members = res.data.members;
         });
@@ -52,9 +59,36 @@ class Table extends Component {
     renderFixRow(n, i) {
         return(
             <div className={`row flex justify-between mv2 relative z-2 ${(i%2===0)? 'bg-white':'bg-light-gray'}`} key={i}>
-                <span className="row-item first">{n["first_name"]}</span>
+                <span className="row-item first">{n["first_name"]}</span> 
             </div>
         )
+    }
+    
+    renderField(f, i) {
+        return(
+            <span className="row-item" key={i}>
+                <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort == f.value && !this.sortOrder) && 'rotate-180' } ${(this.prevSort == f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
+            </span>
+        )
+    }
+
+    sortTable(e) {
+        const filterBy = e.target.dataset.sortBy;
+      
+        // Toggle sort
+        if(filterBy !== this.prevSort) {
+            this.prevSort = filterBy;
+            this.sortOrder = false;
+        } else {
+            this.sortOrder = !this.sortOrder;
+        }
+
+
+        const sortMembers = _.orderBy(this.state.members, filterBy, (this.sortOrder) ? 'asc' : 'desc');
+        this.setState({
+            members: sortMembers,
+            names: sortMembers
+        })
     }
 
     renderRow(m, i) {
@@ -86,6 +120,7 @@ class Table extends Component {
         const {
             members,
             names,
+            fields,
             value
         } = this.state
         
@@ -105,24 +140,7 @@ class Table extends Component {
                             {names.map(this.renderFixRow)}
                         </div>
                         <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
-                                <span className="row-item">Last</span>
-                                <span className="row-item">Points</span>
-                                <span className="row-item">PPG</span>
-                                <span className="row-item">FG%</span>
-                                <span className="row-item">3PT%</span>
-                                <span className="row-item">FT%</span>
-                                <span className="row-item">2pt Made</span>
-                                <span className="row-item">2pt Attempted</span>
-                                <span className="row-item">3pt Made</span>
-                                <span className="row-item">3pt Attempted</span>
-                                <span className="row-item">FT mades</span>
-                                <span className="row-item">FT Attempted</span>
-                                <span className="row-item">Rebounds</span>
-                                <span className="row-item">Assists</span>
-                                <span className="row-item">Steals</span>
-                                <span className="row-item">Blocks</span>
-                                <span className="row-item">Fouls</span>
-                                <span className="row-item">Games Played</span>
+                              {fields.map(this.renderField)}
                         </div>
                         {members.map(this.renderRow)}
                     </div>

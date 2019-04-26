@@ -6,3 +6,7 @@
     -o-transition: $args;
     transition: $args;
   }
+
+.trans {
+    @include transition();
+}

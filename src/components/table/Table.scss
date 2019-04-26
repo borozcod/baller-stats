@@ -36,11 +36,16 @@
             width: 100%;
             text-align: left;
             margin: 0px 10px;
-            min-width: 113px;
+            min-width: 115px;
         }
         &.top-bar {
             background-color: $blue;
             color: white;
+            .row-item {
+                button {
+                    color: white;
+                }
+            }
         }
     }
     .scroll-row {
