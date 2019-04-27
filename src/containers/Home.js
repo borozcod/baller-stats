@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoadCheck from './../components/hoc/LoadCheck'
 import { getTeams } from "./../functions";
 import Card  from "./../components/card/Card";
 import Table  from "./../components/table/Table";
@@ -12,6 +13,7 @@ class Home extends Component {
             teams: [],
             members: [],
             names: [],
+            load: false,
             toggle: 'teams'
         }
     }
@@ -19,7 +21,10 @@ class Home extends Component {
     componentDidMount() {
 
         getTeams().then((res) => {
-            this.setState({teams: res.data.teams});
+            this.setState({
+                teams: res.data.teams,
+                load: true
+            });
         });
 
     }
@@ -27,7 +32,8 @@ class Home extends Component {
     render() {
         const {
             teams,
-            toggle
+            toggle,
+            load
         } = this.state;
         
         return (
@@ -36,15 +42,14 @@ class Home extends Component {
                     <button className={`mh3 db ${(toggle === 'teams')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'teams'});
-                        }}
-                    >Teams</button>
+                        }}>Teams</button>
                     <button className={`mh3 db ${(toggle === 'players')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'players'});
-                        }}
-                    >Players</button>
+                        }}>Players</button>
                 </div>
                 <div className={`teams ${(toggle === 'teams')? 'db': 'dn'}`}>
+                <LoadCheck load={load}>
                 {
                     teams.map((t, i) => {
                         return(
@@ -65,6 +70,7 @@ class Home extends Component {
                         )
                     })
                 }
+                </LoadCheck>
                 </div>
                 <div className={`players ${(toggle === 'players')? 'db': 'dn'}`}>
                     <Table />
