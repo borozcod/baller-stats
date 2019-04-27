@@ -74,10 +74,12 @@ const getMembers = () => {
                                 "team_name": row[19]
                             });
                         }
-                        data.names.push({
-                            "last_name": row[0],
-                            "first_name": row[1]
-                        });
+                        if(i > 0) {
+                            data.names.push({
+                                "last_name": row[0],
+                                "first_name": row[1]
+                            });
+                        }
                     });
                   } else {
                     console.log('No data found.');
