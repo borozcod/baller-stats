@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoadCheck from './../hoc/LoadCheck'
 import { getMembers } from "./../../functions";
 import _ from 'lodash';
 import './Table.scss';
@@ -11,6 +12,7 @@ class Table extends Component {
             members: [],
             names: [],
             fields: [],
+            load: false,
             value: ''
         }
 
@@ -31,6 +33,7 @@ class Table extends Component {
                 members: res.data.members,
                 names: res.data.names,
                 fields: res.data.fields,
+                load: true
             });
             this.all_members = res.data.members;
         });
@@ -121,31 +124,34 @@ class Table extends Component {
             members,
             names,
             fields,
+            load,
             value
         } = this.state
         
         return(
-            <div className="mh4-ns mh2">
-                <div className="table-search">
-                    <input type="text" placeholder="Search by Name or Team" value={value} onChange={this.handleSearch} />
-                    <i className="fas fa-search search-icon"></i>
-                </div>
-                <div className="Table">
-                    
-                        <div className="table-inner">
-                        <div className="fixed-table">
-                            <div className="row flex justify-between mv2 relative z-2 fw7 f6 top-bar">
-                                <span className="row-item first">First</span>
+            <LoadCheck load={load}>
+                <div className="mh4-ns mh2 mb5">
+                    <div className="table-search">
+                        <input type="text" placeholder="Search by Name or Team" value={value} onChange={this.handleSearch} />
+                        <i className="fas fa-search search-icon"></i>
+                    </div>
+                    <div className="Table">
+                        
+                            <div className="table-inner">
+                            <div className="fixed-table">
+                                <div className="row flex justify-between mv2 relative z-2 fw7 f6 top-bar">
+                                    <span className="row-item first">First</span>
+                                </div>
+                                {names.map(this.renderFixRow)}
                             </div>
-                            {names.map(this.renderFixRow)}
+                            <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
+                                {fields.map(this.renderField)}
+                            </div>
+                            {members.map(this.renderRow)}
                         </div>
-                        <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
-                              {fields.map(this.renderField)}
-                        </div>
-                        {members.map(this.renderRow)}
                     </div>
                 </div>
-            </div>
+            </LoadCheck>
         )
     }
 }
