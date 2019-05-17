@@ -7,6 +7,25 @@
     transition: $args;
   }
 
+@mixin breakpoint($point) {
+    $smallMax: 480px;
+    $mediumMax: 880px;
+
+
+    @if $point == large {
+        @media (min-width: $mediumMax) { @content; }
+    }
+    @else if $point == medium {
+        @media (max-width: $mediumMax) { @content; }
+    }
+    @else if $point == small {
+        @media (max-width: $smallMax)  { @content; }
+    }
+    @else {
+        @media (min-width: $point) { @content; }
+    }
+}
+
 .trans {
     @include transition();
 }

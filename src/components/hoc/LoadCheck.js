@@ -5,7 +5,7 @@ const LoadCheck = (props) => {
     if(!props.load) {
         return (
             <div className="mt5">
-                <div class="lds-dual-ring"></div>
+                <div className="lds-dual-ring"></div>
             </div>
         )
     }

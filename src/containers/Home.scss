@@ -13,3 +13,22 @@
         }
     }
 }
+
+.schedule {
+    .play-times {
+        display: flex;
+        justify-content: space-between;
+        span {
+            text-align: left;
+        }
+        .time {
+            min-width: 60px;
+        }
+        .home-team, .away-team {
+            min-width: 150px;
+            @include breakpoint(small) {
+                min-width: 115px; 
+            }
+        }
+    }
+}

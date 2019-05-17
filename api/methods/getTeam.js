@@ -28,14 +28,10 @@ const getTeam = (teamID) => {
                   const data = {}
                   if (rows.length) {
                     rows.map((row) => {
-                        // const team = {
-                        //     row[0] : row[0]
-                        // }
                         data[row[0] + row[1]] = {
                             first_name: row[0],
                             last_name: row[1]
                         }
-                        //data["teams"].push(team);
                     });
 
                   } else {

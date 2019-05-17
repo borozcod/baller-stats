@@ -3,7 +3,7 @@ import React from 'react';
 
 const Card = (props) => {
     return (
-        <div className="Card pa4 mb4 br2 mw6 mr-auto ml-auto">
+        <div className="Card pa4-ns pa2 mb4 br2 mw6 mr-auto ml-auto">
             {props.children}
         </div>
     )
