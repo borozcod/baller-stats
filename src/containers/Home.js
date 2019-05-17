@@ -91,7 +91,6 @@ class Home extends Component {
                             schedule.map((s,i) => {
                                 const day = Object.keys(s)[0];
                                 const times = s[day].map((t,i) => {
-                                        console.log(t);
                                         return(
                                             <div className="play-times f4-ns f5 bb">
                                                 <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
