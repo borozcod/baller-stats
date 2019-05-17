@@ -13,7 +13,7 @@ class Home extends Component {
             teams: [],
             schedule: [],
             load: false,
-            toggle: 'teams'
+            toggle: 'schedule'
         }
     }
 
@@ -21,14 +21,14 @@ class Home extends Component {
 
         getTeams().then((res) => {
             this.setState({
-                teams: res.data.teams,
-                load: true
+                teams: res.data.teams
             });
         });
 
         getSchedule().then((res) => {
             this.setState({
-                schedule: res.data.schedule
+                schedule: res.data.schedule,
+                load: true
             });
         });
 
@@ -45,6 +45,10 @@ class Home extends Component {
         return (
             <div className="home tc">
                 <div className="toggle pv3 flex items-center justify-center">
+                    <button className={`mh3 db ${(toggle === 'schedule')? 'active': ''}`}
+                        onClick={()=>{
+                            this.setState({toggle: 'schedule'});
+                        }}>Schedule</button>
                     <button className={`mh3 db ${(toggle === 'teams')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'teams'});
@@ -53,10 +57,30 @@ class Home extends Component {
                         onClick={()=>{
                             this.setState({toggle: 'players'});
                         }}>Players</button>
-                    <button className={`mh3 db ${(toggle === 'schedule')? 'active': ''}`}
-                        onClick={()=>{
-                            this.setState({toggle: 'schedule'});
-                        }}>Schedule</button>
+                </div>
+                <div className={`schedule ${(toggle === 'schedule')? 'db': 'dn'}`}>
+                    <LoadCheck load={load}>
+                        {
+                            schedule.map((s,i) => {
+                                const day = Object.keys(s)[0];
+                                const times = s[day].map((t,i) => {
+                                        return(
+                                            <div className="play-times f4-ns f5 bb" key={i}>
+                                                <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
+                                                <span className="home-team ml2 pv3 br">{t.home}</span>
+                                                <span className="away-team ml2 pv3">{t.away}</span>
+                                            </div>
+                                        )
+                                })
+                                return (
+                                    <Card key={i}>
+                                        <h1>{day}</h1>
+                                        {times}
+                                    </Card>
+                                );
+                            })
+                        }
+                    </LoadCheck>
                 </div>
                 <div className={`teams ${(toggle === 'teams')? 'db': 'dn'}`}>
                     <LoadCheck load={load}>
@@ -85,31 +109,6 @@ class Home extends Component {
                 <div className={`players ${(toggle === 'players')? 'db': 'dn'}`}>
                     <Table />
                 </div>
-                <div className={`schedule ${(toggle === 'schedule')? 'db': 'dn'}`}>
-                    <LoadCheck load={load}>
-                        {
-                            schedule.map((s,i) => {
-                                const day = Object.keys(s)[0];
-                                const times = s[day].map((t,i) => {
-                                        return(
-                                            <div className="play-times f4-ns f5 bb">
-                                                <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
-                                                <span className="home-team ml2 pv3 br">{t.home}</span>
-                                                <span className="away-team ml2 pv3">{t.away}</span>
-                                            </div>
-                                        )
-                                })
-                                return (
-                                    <Card key={i}>
-                                        <h1>{day}</h1>
-                                        {times}
-                                    </Card>
-                                );
-                            })
-                        }
-                    </LoadCheck>
-                </div>
-                
             </div>
         );
     }
