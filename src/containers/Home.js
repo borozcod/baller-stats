@@ -65,7 +65,7 @@ class Home extends Component {
                                 const day = Object.keys(s)[0];
                                 const times = s[day].map((t,i) => {
                                     return(
-                                        <div className="play-times f4-ns f5 bb" key={i}>
+                                        <div className="play-times f4-ns f6 bb" key={i}>
                                             <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
                                             <span className="away-team pv3 br">{t.away}</span>
                                             <span className="home-team pv3 ">{t.home}</span>
