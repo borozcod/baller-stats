@@ -18,6 +18,9 @@
     .play-times {
         display: flex;
         justify-content: space-between;
+        &:last-child {
+            border-bottom: 0px;
+        }
         span {
             text-align: left;
         }
@@ -26,9 +29,28 @@
         }
         .home-team, .away-team {
             min-width: 150px;
+            padding-left: 20px;
+            position: relative;
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
             @include breakpoint(small) {
                 min-width: 115px; 
             }
+        }
+        .home-team::after {
+            background-color: #fff;
+            border: solid 1px #000;
+        }
+        .away-team::after {
+            background-color: #000;
         }
     }
 }

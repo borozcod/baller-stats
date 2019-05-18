@@ -70,7 +70,7 @@ class Table extends Component {
     renderField(f, i) {
         return(
             <span className="row-item" key={i}>
-                <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort == f.value && this.sortOrder) && 'rotate-180' } ${(this.prevSort == f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
+                <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort === f.value && this.sortOrder) && 'rotate-180' } ${(this.prevSort === f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
             </span>
         )
     }
