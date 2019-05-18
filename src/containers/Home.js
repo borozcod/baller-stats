@@ -67,8 +67,8 @@ class Home extends Component {
                                     return(
                                         <div className="play-times f4-ns f5 bb" key={i}>
                                             <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
-                                            <span className="home-team pv3 br">{t.home}</span>
-                                            <span className="away-team pv3">{t.away}</span>
+                                            <span className="away-team pv3 br">{t.away}</span>
+                                            <span className="home-team pv3 ">{t.home}</span>
                                         </div>
                                     )
                                 });
