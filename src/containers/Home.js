@@ -63,18 +63,23 @@ class Home extends Component {
                         {
                             schedule.map((s,i) => {
                                 const day = Object.keys(s)[0];
+                                const today = new Date();
+                                const date = new Date(day);
+                                const month = date.toLocaleString('en-us', { month: 'long' });
                                 const times = s[day].map((t,i) => {
                                     return(
-                                        <div className="play-times f4-ns f6 bb" key={i}>
+                                        <div className="play-times f4-ns f6 bb b--light-silver" key={i}>
                                             <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
-                                            <span className="away-team pv3 br">{t.away}</span>
+                                            <span className="away-team pv3 br  b--light-silver">{t.away}</span>
                                             <span className="home-team pv3 ">{t.home}</span>
                                         </div>
                                     )
                                 });
+                                // (NOTE): Bryan
+                                // I do the date comparision in the case that we want custom ui for past games. Something like low opacity
                                 return (
-                                    <Card key={i}>
-                                        <h1>{day}</h1>
+                                    <Card key={i} className={`${(today.getTime() > date.getTime())? '': ''}`}>
+                                        <h1>{month} {date.getDate()}</h1>
                                         {times}
                                     </Card>
                                 );
