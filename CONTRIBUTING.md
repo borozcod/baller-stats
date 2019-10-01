@@ -2,7 +2,8 @@
 First and foremost, thank you for helping. Baller Stats is a simple application for a small basketball league. It uses data from a google sheet. The app is split into two parts, the API and the front end. Before anything, make sure to clone this project.
 
 ## API
-Everything inside the `/api` directory. In here is a node app used to get data from a google sheet and return it as json. To get working on the API the are a few steps. Before running any of these steps make sure you are in the api directory by running `cd api`.
+Everything inside the `/api` directory. In here is a node app used to get data from a google sheet and return it as json. To get working on the API there are a few steps. Before running any of these steps make sure you are in the api directory by running `cd api`.
+
 
 1. Create a `config.js` file inside the root of the `api` directory. Paste in the following:
 ```
@@ -39,7 +40,7 @@ Example:
 Even with custom styles, try and keep things consistent with tachyons.
 
 ### Functions
-If you think you might use some piece of logit twice, odds are you will. Just add it to the `functions.js` file found inside `/src`,  add an export statement at the beginning of it. You can take a look at some of the functions that are already in there.
+If you think you might use some piece of logic twice, odds are you will. Just add it to the `functions.js` file found inside `/src`,  add an export statement at the beginning of it. You can take a look at some of the functions that are already in there.
 
 ## Your First Issue
 You got the app running now what. Pick an [issue](https://github.com/borozcod/baller-stats/issues "issue") and lets get to work. Make sure to assign the issue to yourself. Make a branch for that specific issue with your two initials and the issue number. Example `bo/issue-1`. Once you think your branch is ready to be merged, create a pull request and make sure to add `Fixes #1` on the pull request description, with the issue number being your own. This is important since it will help us keep track of things and link issues with pull request. 
