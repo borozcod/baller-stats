@@ -15,3 +15,8 @@ export const getMembers = async () => {
     const members = await axios.get(`${API_URL}/members`)
     return members;
 }
+
+export const getMembersWeek = async () => {
+    const members = await axios.get(`${API_URL}/week`)
+    return members;
+}

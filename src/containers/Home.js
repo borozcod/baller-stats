@@ -3,6 +3,7 @@ import LoadCheck from './../components/hoc/LoadCheck'
 import { getTeams, getSchedule } from "./../functions";
 import Card  from "./../components/card/Card";
 import Table  from "./../components/table/Table";
+import WeekTable  from "./../components/table/WeekTable";
 import './Home.scss';
 
 
@@ -30,6 +31,8 @@ class Home extends Component {
                 schedule: res.data.schedule,
                 load: true
             });
+
+            console.log(res.data.schedule);
         });
 
     }
@@ -56,7 +59,7 @@ class Home extends Component {
                     <button className={`mh3 db ${(toggle === 'players')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'players'});
-                        }}>Players</button>
+                        }}>Total Points</button>
                 </div>
                 <div className={`schedule ${(toggle === 'schedule')? 'db': 'dn'}`}>
                     <LoadCheck load={load}>
@@ -67,6 +70,9 @@ class Home extends Component {
                                 const date = new Date(day);
                                 const month = date.toLocaleString('en-us', { month: 'long' });
                                 const times = s[day].map((t,i) => {
+                                    if(!t.home) {
+                                        return;
+                                    }
                                     return(
                                         <div className="play-times f4-ns f6 bb b--light-silver" key={i}>
                                             <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
@@ -113,6 +119,9 @@ class Home extends Component {
                 </div>
                 <div className={`players ${(toggle === 'players')? 'db': 'dn'}`}>
                     <Table />
+                </div>
+                <div className={`week-points ${(toggle === 'week-points')? 'db': 'dn'}`}>
+                    <WeekTable />
                 </div>
             </div>
         );

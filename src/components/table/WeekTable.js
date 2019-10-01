@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import LoadCheck from './../hoc/LoadCheck'
-import { getMembers } from "./../../functions";
+import { getMembersWeek } from "./../../functions";
 import _ from 'lodash';
 import './Table.scss';
 
-class Table extends Component {
+class WeekTable extends Component {
     constructor(props) {
         super(props);
 
@@ -28,10 +28,9 @@ class Table extends Component {
     }
 
     componentDidMount() {
-        getMembers().then((res) => {
+        getMembersWeek().then((res) => {
             this.setState({
                 members: res.data.members,
-                names: res.data.names,
                 fields: res.data.fields,
                 load: true
             });
@@ -55,7 +54,6 @@ class Table extends Component {
         this.setState({
             members: filter_members,
             names: filter_members
-
         })
     }
 
@@ -68,9 +66,6 @@ class Table extends Component {
     }
     
     renderField(f, i) {
-        if(!f.label){
-            return;
-        }
         return(
             <span className="row-item" key={i}>
                 <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort === f.value && this.sortOrder) && 'rotate-180' } ${(this.prevSort === f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
@@ -98,9 +93,6 @@ class Table extends Component {
     }
 
     renderRow(m, i) {
-        if(!m["last_name"]){
-            return;
-        }
         return(
             <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-white':'bg-light-gray'} `} key={i}>
                 <span className="row-item">{m["last_name"]}</span>
@@ -140,6 +132,12 @@ class Table extends Component {
                     <div className="table-search">
                         <input type="text" placeholder="Search by Name or Team" value={value} onChange={this.handleSearch} />
                         <i className="fas fa-search search-icon"></i>
+                        <select>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="audi">Audi</option>
+                        </select>
                     </div>
                     <div className="Table">
                         
@@ -148,7 +146,7 @@ class Table extends Component {
                                 <div className="row flex justify-between mv2 relative z-2 fw7 f6 top-bar">
                                     <span className="row-item first">First</span>
                                 </div>
-                                {names.map(this.renderFixRow)}
+                                {members.map(this.renderFixRow)}
                             </div>
                             <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
                                 {fields.map(this.renderField)}
@@ -162,4 +160,4 @@ class Table extends Component {
     }
 }
 
-export default Table
+export default WeekTable
