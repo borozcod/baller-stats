@@ -71,8 +71,9 @@ class Table extends Component {
         if(!f.label){
             return;
         }
+        
         return(
-            <span className="row-item" key={i}>
+            <span className={(i === 0) ? ('row-item large') : ('row-item')} key={i}>
                 <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort === f.value && this.sortOrder) && 'rotate-180' } ${(this.prevSort === f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
             </span>
         )
@@ -103,7 +104,7 @@ class Table extends Component {
         }
         return(
             <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-white':'bg-light-gray'} `} key={i}>
-                <span className="row-item">{m["last_name"]}</span>
+                <span className="row-item large">{m["last_name"]}</span>
                 <span className="row-item">{m["points"]}</span>
                 <span className="row-item">{m["ppg"]}</span>
                 <span className="row-item">{m["fg_percent"]}</span>

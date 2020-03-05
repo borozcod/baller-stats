@@ -26,7 +26,7 @@ The client is found in the root of this project. It is basically a `create-react
 2. From the project root directory run `yarn install`.
 3. Start the app by running `yarn start`. 
 
-Make sure you have your api server running on the port specified inside `/api/config.js`. If it is more convenient you can also change `API_URL` to the live api of `http://api.ballerstats.com`.
+Make sure you have your api server running on the port specified inside `/api/config.js`. If it is more convenient you can also change `API_URL` to the live api of `https://api.ballerstats.com`.
 
 ### Components
 To keep things consistent, each component should have its own folder inside the components folder. Look at the `card` folder for example.
