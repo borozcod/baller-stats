@@ -103,7 +103,7 @@ class Home extends Component {
                                     <div className="flex justify-between mw4 mr-auto ml-auto">
                                         <div className="wins tc">
                                             <span className="stat mr3 db f2">{t.wins}</span>
-                                            <span className="">WINS!</span>
+                                            <span className="">WINS</span>
                                         </div>
                                         <div className="slab w2"></div>
                                         <div className="wins tc">
