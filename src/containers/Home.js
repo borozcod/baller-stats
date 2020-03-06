@@ -51,7 +51,7 @@ class Home extends Component {
                     <button className={`mh3 db ${(toggle === 'schedule')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'schedule'});
-                        }}>Schedule!</button>
+                        }}>Schedule</button>
                     <button className={`mh3 db ${(toggle === 'teams')? 'active': ''}`}
                         onClick={()=>{
                             this.setState({toggle: 'teams'});
