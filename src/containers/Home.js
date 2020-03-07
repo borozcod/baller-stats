@@ -31,8 +31,6 @@ class Home extends Component {
                 schedule: res.data.schedule,
                 load: true
             });
-
-            console.log(res.data.schedule);
         });
 
     }
@@ -69,15 +67,38 @@ class Home extends Component {
                                 const today = new Date();
                                 const date = new Date(day);
                                 const month = date.toLocaleString('en-us', { month: 'long' });
-                                const times = s[day].map((t,i) => {
+                                const gym = s[day].map((t,i) => {
                                     if(!t.home) {
-                                        return;
+                                        return('');
                                     }
                                     return(
-                                        <div className="play-times f4-ns f6 bb b--light-silver" key={i}>
-                                            <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
-                                            <span className="away-team pv3 br  b--light-silver">{t.away}</span>
-                                            <span className="home-team pv3 ">{t.home}</span>
+                                        <>
+                                        {(t.open || t.close) && (
+                                            <div className="gym">
+                                                <div className="open"><span>GYM OPEN:</span> {t.open}</div>
+                                                <div className="close"><span>GYM CLOSE:</span> {t.close}</div>
+                                            </div>
+                                        )}
+                                        </>
+                                    )
+                                });
+                                const times = s[day].map((t,i) => {
+                                    if(!t.home) {
+                                        return('');
+                                    }
+                                    return(
+                                        <div className="f6 bb b--light-silver" key={i}>
+                                            {(t.clock || t.stats) && (
+                                                <div className="volunteer">
+                                                    <div className="clock"><span>CLOCK:</span> {t.clock}</div>
+                                                    <div className="stats">{t.stats} <span>:STATS</span></div>
+                                                </div>
+                                            )}
+                                            <div className="play-times">
+                                                <span className="time pv3 bw2 pr3 br b--light-silver">{t.time}</span>
+                                                <span className="away-team pv3 br  b--light-silver">{t.away}</span>
+                                                <span className="home-team pv3 ">{t.home}</span>
+                                            </div>
                                         </div>
                                     )
                                 });
@@ -86,6 +107,7 @@ class Home extends Component {
                                 return (
                                     <Card key={i} className={`${(today.getTime() > date.getTime())? '': ''}`}>
                                         <h1>{month} {date.getDate()}</h1>
+                                        {gym}
                                         {times}
                                     </Card>
                                 );

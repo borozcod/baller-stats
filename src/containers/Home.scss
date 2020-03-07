@@ -54,4 +54,24 @@
             background-color: #000;
         }
     }
+    .volunteer {
+        background:#e3e3e3;
+        font-size:80%;
+        padding:5px;
+        display:flex;
+        span {
+            font-weight:700;
+        }
+        .clock { 
+            width:50%;
+            text-align: left;
+        }
+        .stats { 
+            width:50%;
+            text-align: right;
+        }
+    }
+    .gym {
+        padding-bottom:20px;
+    }
 }

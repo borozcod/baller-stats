@@ -2,7 +2,7 @@ const {authorize, google} = require('./../auth.js');
 const { SHEET_ID } = require('./../variables.js');
 const fs = require('fs');
 
-let RANGE = 'League Schedule!A2:D';
+let RANGE = 'League Schedule!A2:H';
 
 const getSchedule = () => {
     return new Promise(function(resolve, reject){
@@ -38,7 +38,11 @@ const getSchedule = () => {
                             data.schedule[index][day].push({
                                 'time': row[1],
                                 'away': row[2],
-                                'home': row[3]
+                                'home': row[3],
+                                'open': row[4],
+                                'close': row[5],
+                                'stats': row[6],
+                                'clock': row[7]
                             });
                         }
                     });
