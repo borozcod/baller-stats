@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import LoadCheck from './../hoc/LoadCheck'
-import { getMembers } from "./../../functions";
+import { getLeagueLeaders } from "./../../functions";
 import _ from 'lodash';
 import './Table.scss';
 
@@ -9,10 +8,8 @@ class Table extends Component {
         super(props);
 
         this.state = {
-            members: [],
-            names: [],
-            fields: [],
-            load: false,
+            headers: [],
+            rows: [],
             value: ''
         }
 
@@ -24,18 +21,19 @@ class Table extends Component {
         this.renderFixRow = this.renderFixRow.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.sortTable = this.sortTable.bind(this)
-        this.renderField = this.renderField.bind(this)
+        this.renderHeaders = this.renderHeaders.bind(this)
     }
 
     componentDidMount() {
-        getMembers().then((res) => {
+        getLeagueLeaders().then((res) => {
+            const headers = _.keys(res.data[0])
+            const rows = res.data
+
             this.setState({
-                members: res.data.members,
-                names: res.data.names,
-                fields: res.data.fields,
-                load: true
+                headers: headers,
+                rows: rows
             });
-            this.all_members = res.data.members;
+            // this.all_members = res.data.members;
         });
     }
 
@@ -67,15 +65,36 @@ class Table extends Component {
         )
     }
     
-    renderField(f, i) {
-        if(!f.label){
+    renderHeaders(value, i) {
+        if(!value){
             return;
         }
-        
+
+        if(value.indexOf("-percent") > -1){
+            return;
+        }
+
         return(
-            <span className={(i === 0) ? ('row-item large') : ('row-item')} key={i}>
-                <button onClick={this.sortTable} data-sort-by={f.value} >{f.label}<i className={` ${(this.prevSort === f.value && this.sortOrder) && 'rotate-180' } ${(this.prevSort === f.value)? '': 'o-10'} fas fa-sort-down ml2 trans`}></i> </button>
-            </span>
+            <th className="dib" key={i}><span className="db ml2">{value}</span></th>
+        )
+    }
+
+    renderRow(row, i) {
+        console.log(row);
+        const filteredData = _.pickBy(row, (val,key) => !(key.toString().indexOf("-percent") > -1));
+        const values = _.map(filteredData);
+        
+        return (
+            <tr key={`tr-${i}`} className={`pv2 ${(i % 2 == 0) && 'bg-lightest-blue'}`}>
+                {
+                    // row.map((value, key) => {
+                    //     return <td key={`td-${key}`}><span className="db ml2">{value}</span></td>
+                    // })
+                    values.map((value, i)=> {
+                        return <td key={`td-${i}`}><span className="db ml2">{value}</span></td>
+                    })
+                }
+            </tr>
         )
     }
 
@@ -98,67 +117,32 @@ class Table extends Component {
         })
     }
 
-    renderRow(m, i) {
-        if(!m["last_name"]){
-            return;
-        }
-        return(
-            <div className={` row scroll-row flex justify-between mv2 relative z-1 ${(i%2===0)? 'bg-white':'bg-light-gray'} `} key={i}>
-                <span className="row-item large">{m["last_name"]}</span>
-                <span className="row-item">{m["points"]}</span>
-                <span className="row-item">{m["ppg"]}</span>
-                <span className="row-item">{m["fg_percent"]}</span>
-                <span className="row-item">{m["3pt_percent"]}</span>
-                <span className="row-item">{m["ft_percent"]}</span>
-                <span className="row-item">{m["2pt_made"]}</span>
-                <span className="row-item">{m["2pt_attempted"]}</span>
-                <span className="row-item">{m["3pt_made"]}</span>
-                <span className="row-item">{m["3pt_attempted"]}</span>
-                <span className="row-item">{m["ft_mades"]}</span>
-                <span className="row-item">{m["ft_attempted"]}</span>
-                <span className="row-item">{m["rebounds"]}</span>
-                <span className="row-item">{m["assists"]}</span>
-                <span className="row-item">{m["steals"]}</span>
-                <span className="row-item">{m["blocks"]}</span>
-                <span className="row-item">{m["fouls"]}</span>
-                <span className="row-item">{m["games_played"]}</span>
-            </div>
-        )
-    }
     
     render() {
         const {
-            members,
-            names,
-            fields,
-            load,
+            headers,
+            rows,
             value
         } = this.state
         
         return(
-            <LoadCheck load={load}>
                 <div className="mh4-ns mh2 mb5">
                     <div className="table-search">
                         <input type="text" placeholder="Search by Name or Team" value={value} onChange={this.handleSearch} />
                         <i className="fas fa-search search-icon"></i>
                     </div>
-                    <div className="Table">
-                        
-                            <div className="table-inner">
-                            <div className="fixed-table">
-                                <div className="row flex justify-between mv2 relative z-2 fw7 f6 top-bar">
-                                    <span className="row-item first">First</span>
-                                </div>
-                                {names.map(this.renderFixRow)}
-                            </div>
-                            <div className="fw7 f6 row scroll-row flex justify-between mv2 relative z-1 fw7 f6 top-bar">
-                                {fields.map(this.renderField)}
-                            </div>
-                            {members.map(this.renderRow)}
-                        </div>
+                    <div>
+                        <table className="table">
+                            <tbody>
+                                <tr className="blue-background white pv2">
+                                    {headers.map(this.renderHeaders)}
+                                </tr>
+                                { rows.map(this.renderRow) }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </LoadCheck>
+            
         )
     }
 }

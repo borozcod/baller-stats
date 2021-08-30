@@ -1,8 +1,13 @@
 import axios from 'axios';
-import { API_URL } from "./config";
+let API_URL = process.env.REACT_APP_API_URL;
+
+export const getLeagueLeaders = async () => {
+    const leaders = await axios.get(`${API_URL}/league-leaders.json`)
+    return leaders;
+}
 
 export const getTeams = async () => {
-    const teams = await axios.get(`${API_URL}/teams`)
+    const teams = await axios.get(`${API_URL}/league-leaders.json`)
     return teams;
 }
 
@@ -20,3 +25,4 @@ export const getMembersWeek = async () => {
     const members = await axios.get(`${API_URL}/week`)
     return members;
 }
+

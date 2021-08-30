@@ -29,3 +29,5 @@ api/config.js
 
 # API
 secret.json
+
+.env

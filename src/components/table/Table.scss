@@ -1,79 +1,98 @@
 @import "./../../styles/base";
 
-.Table {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    border-radius: $radius;
-    overflow: hidden;
-    .table-inner {
-        overflow-x: scroll;
+.table {
+    display: block;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 6px auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 15px 0;
+
+    th, td {
+        min-width: 170px;
     }
-    .fixed-table {
-        position: absolute;
-        left: 0px;
-        top: 0px;
-        z-index: 2;
-        box-shadow: -2px -3px 7px 0px #000000;
-        .row {
-            padding: 15px;
-            margin-left: 0px;
-            margin-right: 0px;
-            border-radius: 0px;
-            min-width: 200px;
-            .row-item {
-                min-width: 80px;
-            }
-        }
-    }
-    .row {
-        padding: 15px 0px;
-        margin: 0px 10px;
-        border-radius: $radius;
-        width: fit-content;
-        position: relative;
-        .row-item {
-            width: 100%;
-            text-align: left;
-            margin: 0px 10px;
-            min-width: 115px;
-        }
-        .row-item.large {
-            min-width: 200px;
-        }
-        &.top-bar {
-            background-color: $blue;
-            color: white;
-            .row-item {
-                button {
-                    color: white;
-                }
-            }
-        }
-    }
-    .scroll-row {
-        padding-left: 200px!important;
+
+    tr {
+        display: flex;
+        text-align: left;
     }
 }
 
-.table-search {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 320px;
-    margin: 0 auto 20px auto;
-    .search-icon {
-        position: absolute;
-        left: 15px;
-        color: #dbdbdb;
-    }
-    input {
-        border: solid 2px #dbdbdb;
-        border-radius: $radius;
-        padding: 10px 15px 10px 40px;
-        width: 100%;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-}
+// .Table {
+//     max-width: 1200px;
+//     margin: 0 auto;
+//     position: relative;
+//     border-radius: $radius;
+//     overflow: hidden;
+//     .table-inner {
+//         overflow-x: scroll;
+//     }
+//     .fixed-table {
+//         position: absolute;
+//         left: 0px;
+//         top: 0px;
+//         z-index: 2;
+//         box-shadow: -2px -3px 7px 0px #000000;
+//         .row {
+//             padding: 15px;
+//             margin-left: 0px;
+//             margin-right: 0px;
+//             border-radius: 0px;
+//             min-width: 200px;
+//             .row-item {
+//                 min-width: 80px;
+//             }
+//         }
+//     }
+//     .row {
+//         padding: 15px 0px;
+//         margin: 0px 10px;
+//         border-radius: $radius;
+//         width: fit-content;
+//         position: relative;
+//         .row-item {
+//             width: 100%;
+//             text-align: left;
+//             margin: 0px 10px;
+//             min-width: 115px;
+//         }
+//         .row-item.large {
+//             min-width: 200px;
+//         }
+//         &.top-bar {
+//             background-color: $blue;
+//             color: white;
+//             .row-item {
+//                 button {
+//                     color: white;
+//                 }
+//             }
+//         }
+//     }
+//     .scroll-row {
+//         padding-left: 200px!important;
+//     }
+// }
+
+// .table-search {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     max-width: 320px;
+//     margin: 0 auto 20px auto;
+//     .search-icon {
+//         position: absolute;
+//         left: 15px;
+//         color: #dbdbdb;
+//     }
+//     input {
+//         border: solid 2px #dbdbdb;
+//         border-radius: $radius;
+//         padding: 10px 15px 10px 40px;
+//         width: 100%;
+//         -webkit-appearance: none;
+//         -moz-appearance: none;
+//     }
+// }
