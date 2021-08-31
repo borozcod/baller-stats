@@ -36,6 +36,11 @@ const Graph = (props) => {
         const value = e.target.value;
         const chartData = []
 
+        if(value === "none") {
+            chart.destroy()
+            return;
+        }
+
         _.forEach(teams[value]['members'], (teamMember, i) => {
             chartData.push(
                 {
@@ -62,6 +67,7 @@ const Graph = (props) => {
         <div>
             <div>
                 <select onChange={handleTeamChange}>
+                    <option value="none"></option>
                     { teams.map(renderOptions) }
                 </select>
             </div>

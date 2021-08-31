@@ -19,7 +19,6 @@ const Home = (props) => {
         const fetchData = async () => {
             const { data } = await getLeagueLeaders();
             const teams = getTeams(data);
-            console.log(teams);
 
             setTeams(teams);
             setStats(data);
@@ -30,9 +29,9 @@ const Home = (props) => {
 
     return (
         <div className="tc">
-            <div>
-                <button onClick={() => {setTab('standings')}}>Standings</button>
-                <button onClick={() => {setTab('graph')}}>Graph</button>
+            <div className="mb3">
+                <button className="mr2" onClick={() => {setTab('standings')}}>Standings</button>
+                <button className="ml2" onClick={() => {setTab('graph')}}>Graph</button>
             </div>
             <div className={`${(tab === 'standings')? 'db': 'dn'}`}>
                 <Table />

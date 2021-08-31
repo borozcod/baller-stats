@@ -23,7 +23,9 @@ export const getTeams = (teams) => {
         }
 
         const teamMemberIndex = _.indexOf(teamList, team['team-name']);
-        teamData[teamMemberIndex]['members'].push(team);
+        if(team['first'] !== 'blank') {
+            teamData[teamMemberIndex]['members'].push(team);
+        }
     });
 
     return teamData;
