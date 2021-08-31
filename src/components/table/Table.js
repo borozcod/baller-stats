@@ -1,21 +1,16 @@
-import React, { Component, useState, useEffect } from 'react';
-import { getLeagueLeaders } from "./../../functions";
+import React, { useContext } from 'react';
+import StatsContext from './../../context/stats-context';
 import _ from 'lodash';
 import './Table.scss';
 
 const Table = () => {
 
-    const [headers, setHeaders] = useState([]);
-    const [rows, setRows] = useState([]);
+    const {
+        stats
+    } = useContext(StatsContext)
 
-    useEffect(() => {
-        getLeagueLeaders().then((res) => {
-            const headers = _.keys(res.data[0])
-            const rows = res.data
-            setHeaders(headers)
-            setRows(rows)
-        });
-    }, []);
+    const headers = _.keys(stats[0])
+    const rows = stats
 
     const renderHeaders = (value, i) => {
         if(!value){
@@ -32,15 +27,11 @@ const Table = () => {
     }
 
     const renderRow = (row, i) => {
-
         const filteredData = _.pickBy(row, (val,key) => !(key.toString().indexOf("-percent") > -1));
         const values = _.map(filteredData);
         return (
-            <tr key={`tr-${i}`} className={`pv2 ${(i % 2 == 0) && 'bg-lightest-blue'}`}>
+            <tr key={`tr-${i}`} className={`pv2 ${(i % 2 === 0) && 'bg-lightest-blue'}`}>
                 {
-                    // row.map((value, key) => {
-                    //     return <td key={`td-${key}`}><span className="db ml2">{value}</span></td>
-                    // })
                     values.map((value, i)=> {
                         return <td key={`td-${i}`}><span className="db ml2">{value}</span></td>
                     })
