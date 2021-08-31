@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 const Graph = (props) => {
     return (

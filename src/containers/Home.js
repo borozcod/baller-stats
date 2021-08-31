@@ -1,39 +1,25 @@
-import React, { Component } from 'react';
-
-// import Card  from "./../components/card/Card";
+import React, { Component, useState } from 'react';
 import Table  from "./../components/table/Table";
 import Graph  from "./../components/graph/Graph";
-// import WeekTable  from "./../components/table/WeekTable";
 import './Home.scss';
 
-
-class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            teams: [],
-            schedule: [],
-            load: false,
-            toggle: 'players'
-        }
-    }
-
-    render() {
-        const {
-            toggle,
-        } = this.state;
-
-        return (
-            <div className="home tc">
-                <div className={`players ${(toggle === 'players')? 'db': 'dn'}`}>
-                    <Graph />
-                </div>
-                <div className={`week-points ${(toggle === 'week-points')? 'db': 'dn'}`}>
-                    {/* <WeekTable /> */}
-                </div>
+const Home = (props) => {
+    const [tab, setTab] = useState('standings');
+    
+    return (
+        <div className="tc">
+            <div>
+                <button onClick={() => {setTab('standings')}}>Standings</button>
+                <button onClick={() => {setTab('graph')}}>Graph</button>
             </div>
-        );
-    }
+            <div className={`${(tab === 'standings')? 'db': 'dn'}`}>
+                <Table />
+            </div>
+            <div className={`${(tab === 'graph')? 'db': 'dn'}`}>
+                <Graph />
+            </div>
+        </div>
+    )
 }
 
 export default Home;
