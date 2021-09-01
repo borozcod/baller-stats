@@ -7,7 +7,12 @@ export const getLeagueLeaders = async () => {
 }
 
 export const getTeams = async () => {
-    const teams = await axios.get(`${API_URL}/league-leaders.json`)
+    const teams = await axios.get(`${API_URL}/teams.json`)
+    return teams;
+}
+
+export const getTeam = async (team) => {
+    const teams = await axios.get(`${API_URL}/team-${team}.json`)
     return teams;
 }
 
