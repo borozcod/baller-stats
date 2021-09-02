@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Table  from './../components/table/Table';
 import Graph  from './../components/graph/Graph';
 import Filters from './../components/filters/Filters'
-import StatsContext from './../context/stats-context';
-import { getLeagueLeaders } from './../functions';
-import { getTeams } from './../utils/stats-parser';
 import './Home.scss';
 
-const Home = (props) => {
+const Home = () => {
     const [tab, setTab] = useState('graph');
 
     return (

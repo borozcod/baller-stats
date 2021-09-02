@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import StatsContext from './../../context/stats-context';
 import _ from 'lodash';
 import './Table.scss';

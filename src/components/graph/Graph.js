@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
 import { COLORS } from './../../utils/graph-utils';
 import StatsContext from './../../context/stats-context';

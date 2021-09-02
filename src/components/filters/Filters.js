@@ -25,7 +25,6 @@ const Filters = () => {
     ]
 
     const {
-        stats, 
         setStats,
         teams,
         setTeams
@@ -44,9 +43,9 @@ const Filters = () => {
         fetchData()
     }, [])
 
-    const renderTeams = (thisTeam) => {
+    const renderTeams = (thisTeam, i) => {
         return(
-            <option key={`team-${thisTeam.id}`} value={thisTeam.id}>{thisTeam.name}</option>
+            <option key={`team-${i}`} value={thisTeam.team}>{thisTeam.name}</option>
         )
     }
 
@@ -57,9 +56,9 @@ const Filters = () => {
     }
 
     const handleTeamChange = async (e) => {
-        const teamID = e.target.value;
-
-        setTeamSelect(teamID);
+        const teamID = e.target.value.match(/\d+/)[0];
+        console.log(teamID);
+        setTeamSelect(`team-${teamID}`);
         setGameSelect('total');
 
         if(teamID === 'all') {
@@ -72,7 +71,7 @@ const Filters = () => {
 
         // Todo (bryan): the api should drop the first row from totals
         // Alternatively we can remove that row from the csv
-        const totalStats = _.drop(data['total']['stats'], 1);
+        const totalStats = data['total']['stats'];
         setStats(totalStats)
         setTeamData(data)
     }
@@ -84,7 +83,7 @@ const Filters = () => {
 
         if(gameID === "total") {
             //_.drop(teamData['total']['stats'], 1)
-            setStats(_.drop(teamData['total']['stats'], 1))
+            setStats(teamData['total']['stats'])
         } else {
             setStats(teamData['events'][gameID]['stats'])
         }
