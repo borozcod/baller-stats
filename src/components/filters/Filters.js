@@ -10,7 +10,7 @@ const Filters = () => {
     const [gameSelect, setGameSelect] = useState('none');
     const [teamData, setTeamData] = useState([]);
 
-    // This should be part of the api
+    // Idealy this should be part of the api
     const games = [
         "Game 1",
         "Game 2",
@@ -57,8 +57,8 @@ const Filters = () => {
 
     const handleTeamChange = async (e) => {
         const teamID = e.target.value.match(/\d+/)[0];
-        console.log(teamID);
-        setTeamSelect(`team-${teamID}`);
+
+        setTeamSelect(`${teamID}`);
         setGameSelect('total');
 
         if(teamID === 'all') {
@@ -68,10 +68,8 @@ const Filters = () => {
         }
 
         const { data } = await getTeam(teamID);
-
-        // Todo (bryan): the api should drop the first row from totals
-        // Alternatively we can remove that row from the csv
         const totalStats = data['total']['stats'];
+
         setStats(totalStats)
         setTeamData(data)
     }
@@ -82,7 +80,6 @@ const Filters = () => {
         setGameSelect(e.target.value)
 
         if(gameID === "total") {
-            //_.drop(teamData['total']['stats'], 1)
             setStats(teamData['total']['stats'])
         } else {
             setStats(teamData['events'][gameID]['stats'])
