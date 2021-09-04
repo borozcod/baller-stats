@@ -7,26 +7,8 @@ import { getLeagueLeaders } from './../functions';
 import { getTeams } from './../utils/stats-parser';
 import './Home.scss';
 
-const Home = (props) => {
-    const [tab, setTab] = useState('standings');
-
-    const {
-        setStats,
-        setTeams
-    } = useContext(StatsContext)
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            const { data } = await getLeagueLeaders();
-            const teams = getTeams(data);
-
-            setTeams(teams);
-            setStats(data);
-        }
-
-        fetchData()
-    }, []);
+const Home = () => {
+    const [tab, setTab] = useState('graph');
 
     return (
         <div className="tc">
