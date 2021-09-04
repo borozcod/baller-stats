@@ -1,81 +1,62 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import { COLORS } from './../../utils/graph-utils';
+import { getColor } from './../../utils/graph-utils';
 import StatsContext from './../../context/stats-context';
 import _ from 'lodash'
 Chart.register(...registerables);
-var chart
+var chart =  new Chart();
+let fields = [
+    '2pt-made',
+    '2pt-attempted' ,
+    '3pt-made',
+    'ft-mades',
+    'ft-attempted',
+    'rebounds',
+    'steals',
+    'assists',
+    'blocks',
+    'points',
+]
 
-const Graph = (props) => {
+const Graph = () => {
     const canvasRef = useRef(null);
-    const [membersData, setMemebrs] = useState([])
 
     const {
-        teams
-    } = useContext(StatsContext)
-
-
+        stats
+    } = useContext(StatsContext);
 
     useEffect(() => {
+
+        chart.destroy()
+        const chartData = [];
+
+        _.forEach(stats, (teamMember, i) => {
+            const pickData = _.pick(teamMember, fields);
+            const pickDataValues = _.values(pickData);
+            chartData.push({
+                label: `${teamMember['first']} ${teamMember['last']}`,
+                data: pickDataValues,
+                backgroundColor: getColor(i)
+            });
+        });
+
         chart = new Chart(canvasRef.current, {
             type: 'radar',
             data: {
-                labels: ['ppg', '2pt-made', '2pt-attempted', '3pt-made', '3pt-attempted', 'ft-mades', "ft-attempted" ],
-                datasets: membersData
+                labels: fields,
+                datasets: chartData
+
             }
         });
-    }, [membersData]);
-
-    const renderOptions = (team, i) => {
-        return(
-            <option key={`option-${i}`} value={i}>{team.name}</option>
-        )
-    }
-
-    const handleTeamChange = (e) => {
-        const value = e.target.value;
-        const chartData = []
-
-        if(value === "none") {
-            chart.destroy()
-            return;
-        }
-
-        _.forEach(teams[value]['members'], (teamMember, i) => {
-            chartData.push(
-                {
-                    label: `${teamMember['first']} ${teamMember['last']}`,
-                    data: [
-                        teamMember['ppg'], 
-                        teamMember['2pt-made'], 
-                        teamMember['2pt-attempted'], 
-                        teamMember['3pt-made'], 
-                        teamMember['3pt-attempted'], 
-                        teamMember['ft-mades'], 
-                        teamMember["ft-attempted"] 
-                    ],
-                    backgroundColor: COLORS[i],
-                    opacity: 0.5
-                }
-            )
-        });
-        chart.destroy()
-        setMemebrs(chartData);
-    }
+    })
 
     return (
         <div>
-            <div>
-                <select onChange={handleTeamChange}>
-                    <option value="none"></option>
-                    { teams.map(renderOptions) }
-                </select>
-            </div>
             <div className="mw6 center">
                 <canvas ref={canvasRef} id="myChart" height="400"></canvas>
             </div>
         </div>
-    )
+    );
 }
 
-export default Graph
+export default Graph;

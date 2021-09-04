@@ -21,3 +21,15 @@ export const COLORS = [
   'rgba(63, 100, 213, 0.5)',
   'rgba(213, 63, 154, 0.5)',
 ];
+
+export const getColor = (i) => {
+  const abs = Math.abs;
+  const sin = Math.sin;
+
+  const o = Math.round;
+  const r = abs(sin(i) * 16777215) % 255;
+  const g = abs(sin(i + 1) * 16777215) % 255
+  const b = abs(sin(i + 2) * 16777215) % 255
+
+  return 'rgba(' + o(r) + ',' + o(g) + ',' + o(b) + ', 0.5)';
+}

@@ -42,13 +42,10 @@ const Table = () => {
 
     return (
         <div className="mh4-ns mh2 mb5">
-            <div className="table-search">
-                <input type="text" placeholder="Search by Name or Team" />
-                <i className="fas fa-search search-icon"></i>
-            </div>
-            <div>
+            <div className="relative">
                 <table className="table">
                     <tbody>
+                        <tr className="black pv2">Scroll to see more ---></tr>
                         <tr className="blue-background white pv2">
                             {headers.map(renderHeaders)}
                         </tr>
