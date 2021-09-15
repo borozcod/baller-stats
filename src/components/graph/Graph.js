@@ -53,7 +53,7 @@ const Graph = () => {
     return (
         <div>
             <div className="mw6 center">
-                <canvas ref={canvasRef} id="myChart" height="400"></canvas>
+                <canvas ref={canvasRef} id="graph" height="400"></canvas>
             </div>
         </div>
     );
