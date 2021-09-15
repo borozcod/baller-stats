@@ -8,7 +8,40 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.lime {
+  color:#f3ec60;
+}
+
+.lime-background {
+  background-color:#f3ec60;
+}
+
+.blue {
+  color: #3b29af;
+}
+
+.blue-background {
+  background-color: #3b29af;
+}
+
+.orange-background {
+  background-color: #fc5842;
+}
+
+.orange {
+  color: #fc5842;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+h1 {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 700;
+  color: black;
+}
+
+p {
+  color: #f3ec60;
 }

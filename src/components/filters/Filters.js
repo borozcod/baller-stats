@@ -1,4 +1,4 @@
-import './Filters.scss';
+import './Filters.css';
 import _ from 'lodash';
 import { getTeams, getTeam, getLeagueLeaders } from './../../functions.js'
 import React, { useEffect, useState, useContext } from 'react';

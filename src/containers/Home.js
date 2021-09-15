@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Table  from "./../components/table/Table";
 import Graph  from "./../components/graph/Graph";
 import Filters from "./../components/filters/Filters"
-import './Home.scss';
+import './Home.css';
 
 const Home = () => {
     const [tab, setTab] = useState('table');

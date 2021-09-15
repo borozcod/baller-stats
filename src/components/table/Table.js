@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import StatsContext from './../../context/stats-context';
 import _ from 'lodash';
-import './Table.scss';
+import './Table.css';
 
 const Table = () => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import './LoadCheck.scss';
+import './LoadCheck.css';
 
 const LoadCheck = (props) => {
     if(!props.load) {
