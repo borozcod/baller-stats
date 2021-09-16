@@ -21,6 +21,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "dist/*"
+          source: "dist/index.html,dist/static"
           target: "/sites/ballerstats.com/files/stats"
           overwrite: true
