@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Home from "./containers/Home";
 import { StatsContextProvider } from './context/stats-context.js';
-import './App.scss';
 
 const App = () => {
 
@@ -9,7 +8,7 @@ const App = () => {
     const [teams, setTeams] = useState([])
 
     const contextData = {
-        stats: stats, 
+        stats: stats,
         setStats: setStats,
         teams: teams,
         setTeams: setTeams

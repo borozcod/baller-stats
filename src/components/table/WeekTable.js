@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoadCheck from './../hoc/LoadCheck'
 import { getMembersWeek } from "./../../functions";
 import _ from 'lodash';
-import './Table.scss';
+import './Table.css';
 
 class WeekTable extends Component {
     constructor(props) {

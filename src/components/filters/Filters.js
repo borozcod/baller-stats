@@ -1,4 +1,4 @@
-import './Filters.scss';
+import './Filters.css';
 import _ from 'lodash';
 import { getTeams, getTeam, getLeagueLeaders } from './../../functions.js'
 import React, { useEffect, useState, useContext } from 'react';
@@ -56,20 +56,22 @@ const Filters = () => {
     }
 
     const handleTeamChange = async (e) => {
-        const teamID = e.target.value.match(/\d+/)[0];
-
-        setTeamSelect(`${teamID}`);
+        const teamID = e.target.value
         setGameSelect('total');
 
         if(teamID === 'all') {
             const allTeams = await getLeagueLeaders();
             setStats(allTeams.data);
+            setTeamSelect('all');
             return;
         }
 
+        setTeamSelect(teamID);
         const { data } = await getTeam(teamID);
-        const totalStats = data['total']['stats'];
 
+        // Todo (bryan): the api should drop the first row from totals
+        // Alternatively we can remove that row from the csv
+        const totalStats = data['total']['stats'];
         setStats(totalStats)
         setTeamData(data)
     }
