@@ -7,27 +7,27 @@ import replace from '@rollup/plugin-replace';
 import postcss from 'rollup-plugin-postcss';
 import json from '@rollup/plugin-json';
 import { terser } from 'rollup-plugin-terser';
+import copy from 'rollup-plugin-copy'
+import del from 'rollup-plugin-delete'
 
 const isProduction = process.env.NODE_ENV === 'production';
+const homepage = process.env.PUBLIC_URL || 'http://localhost:3000';
 
 export default {
   input: "src/index.js",
   output: [{
-    file: "dist/bundle.js",
+    file: "dist/static/bundle.js",
     format: "iife",
     sourcemap: true,
-  },
-  {
-    file: "dist/bundle.min.js",
-    format: "iife",
-    plugins: [terser()]
+    plugins: [isProduction && terser()]
   }
   ],
   plugins: [
+    isProduction && del({ targets: 'dist/*' }),
     json(),
     postcss({
-      extract: true,
-      extensions: ['.css', '.scss']
+      extract: 'main.css',
+      extensions: ['.css']
     }),
     nodeResolve({
       browser: true,
@@ -46,13 +46,22 @@ export default {
       presets: ["@babel/preset-react"],
       babelHelpers: 'bundled'
     }),
+    copy({
+      targets: [
+        {
+          src: 'public/index.html',
+          dest: 'dist',
+          transform: (contents, filename) => contents.toString().replace(/%PUBLIC_URL%/g, homepage)
+        }
+      ]
+    }),
+    !isProduction && livereload(),
     !isProduction && serve({
       open: true,
       verbose: true,
-      contentBase: ["", "public"],
+      contentBase: ["dist"],
       host: "localhost",
       port: 3000,
-    }),
-    !isProduction && livereload({ watch: "dist" }),
+    })
   ]
 };
