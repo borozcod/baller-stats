@@ -12,7 +12,6 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - run: echo "💡 The ${{ github.repository }} repository has been cloned."
-      - run: echo "Homepage - ${{ secrets.PUBLIC_URL }}."
       - name: Build bundle files
         run: |
           npm ci
