@@ -13,6 +13,7 @@ jobs:
         env:
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          NODE_ENV: 'production'
       - run: echo "💡 The ${{ github.repository }} repository has been cloned."
       - name: Build bundle files
         run: |
