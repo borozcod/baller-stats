@@ -1,20 +1,18 @@
 name: Build and Deploy Baller Stats
-on:
-  push:
-    branches:
-      - main
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: production
+    env:
+        PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+        REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+        NODE_ENV: 'production'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-        env:
-          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          NODE_ENV: 'production'
       - run: echo "💡 The ${{ github.repository }} repository has been cloned."
+      - run: echo "Homepage - ${{ secrets.PUBLIC_URL }}."
       - name: Build bundle files
         run: |
           npm ci
