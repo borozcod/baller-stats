@@ -1,5 +1,3 @@
-@import "./../../styles/base";
-
 .table {
     display: block;
     max-width: -moz-fit-content;
@@ -7,13 +5,13 @@
     margin: 6px auto;
     overflow-x: auto;
     white-space: nowrap;
+}
 
-    th, td {
-        min-width: 170px;
-    }
+.table th, td  {
+    min-width: 170px;
+}
 
-    tr {
-        display: flex;
-        text-align: left;
-    }
+.table tr, td  {
+    display: flex;
+    text-align: left;
 }
