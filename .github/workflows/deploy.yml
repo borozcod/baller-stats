@@ -24,3 +24,4 @@ jobs:
           source: "dist/index.html,dist/static"
           target: "/sites/ballerstats.com/files/stats"
           overwrite: true
+          strip_components: 1
