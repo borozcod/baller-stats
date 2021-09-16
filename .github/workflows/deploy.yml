@@ -1,0 +1,25 @@
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Check out repository code
+      - uses: actions/checkout@v2
+        env:
+          PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned."
+      - name: Build bundle files
+        run: |
+          npm ci
+          npm run build
+      - name: Copy file via ssh password to website
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "dist/*"
+          target: "/sites/ballerstats.com/files/stats/"
