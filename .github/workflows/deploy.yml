@@ -6,7 +6,7 @@ jobs:
     environment: production
     steps:
       - name: Check out repository code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         env:
           PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
