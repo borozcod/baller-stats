@@ -10,7 +10,7 @@ const Filters = () => {
     const [gameSelect, setGameSelect] = useState('none');
     const [teamData, setTeamData] = useState([]);
 
-    // Idealy this should be part of the api
+    // Ideally this should be part of the api
     const games = [
         "Game 1",
         "Game 2",
@@ -26,22 +26,8 @@ const Filters = () => {
 
     const {
         setStats,
-        teams,
-        setTeams
+        teams
     } = useContext(StatsContext);
-
-    useEffect( () => {
-
-        const fetchData = async () => {
-            const teamReq = await getTeams();
-            const leadersReq = await getLeagueLeaders();
-
-            setTeams(teamReq.data);
-            setStats(leadersReq.data);
-        }
-
-        fetchData()
-    }, [])
 
     const renderTeams = (thisTeam, i) => {
         return(

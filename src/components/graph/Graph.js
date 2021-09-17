@@ -1,59 +1,89 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import { Chart, registerables } from 'chart.js';
+import React, { useContext, useEffect, useState } from 'react';
 import { getColor } from './../../utils/graph-utils';
 import StatsContext from './../../context/stats-context';
+import { getLeagueLeaders } from './../../functions';
 import _ from 'lodash'
-Chart.register(...registerables);
-var chart =  new Chart();
+import { Radar } from 'react-chartjs-2';
+
 let fields = [
-    '2pt-made',
-    '2pt-attempted' ,
-    '3pt-made',
-    'ft-mades',
-    'ft-attempted',
-    'rebounds',
-    'steals',
-    'assists',
-    'blocks',
-    'points',
+    'aggressiveness',
+    'offensive-efficiency',
+    'defensive-rating',
+    'rebounding',
+    'playmaking',
 ]
 
+const formatGraphData = (apiData) => {
+    const chartDataset = [];
+    _.forEach(apiData, (teamMember, i) => {
+        const pickData = _.pick(teamMember, fields);
+        const pickDataValues = _.values(pickData);
+        chartDataset.push({
+            label: `${teamMember['first']} ${teamMember['last']}`,
+            data: pickDataValues,
+            backgroundColor: getColor(i)
+        });
+    });
+
+    const chartDataFormatted = {
+        labels: fields,
+        datasets: chartDataset
+    }
+
+    return chartDataFormatted;
+}
+
 const Graph = () => {
-    const canvasRef = useRef(null);
 
     const {
-        stats
+        stats,
+        teams
     } = useContext(StatsContext);
 
+    const [leagueLeaders, setLeagueLeaders] = useState([]);
+    const [graphData, setGraphData] = useState([]);
+    const [teamSelect, setTeamSelect] = useState('all');
+
     useEffect(() => {
+        const loadData = async () => {
+            const { data } = await getLeagueLeaders();
+            setLeagueLeaders(data);
+            setGraphData(data);
+        }
+        loadData();
+    }, [])
 
-        chart.destroy()
-        const chartData = [];
+    const handleTeamChange = async (e) => {
+        const teamName = e.target.value;
+        setTeamSelect(teamName);
 
-        _.forEach(stats, (teamMember, i) => {
-            const pickData = _.pick(teamMember, fields);
-            const pickDataValues = _.values(pickData);
-            chartData.push({
-                label: `${teamMember['first']} ${teamMember['last']}`,
-                data: pickDataValues,
-                backgroundColor: getColor(i)
-            });
-        });
+        if(teamName == 'all') {
+            const { data } = await getLeagueLeaders();
+            setGraphData(data);
 
-        chart = new Chart(canvasRef.current, {
-            type: 'radar',
-            data: {
-                labels: fields,
-                datasets: chartData
+            return;
+        }
 
-            }
-        });
-    })
+        const teamData = _.filter(leagueLeaders, ['team-name', teamName]);
+        setGraphData(teamData);
+    }
+
+    const renderTeams = (thisTeam, i) => {
+        return(
+            <option key={`team-${i}`} value={thisTeam.name}>{thisTeam.name}</option>
+        )
+    }
+
+    const chartData = formatGraphData(graphData);
 
     return (
         <div>
+            <select className="mr2" value={teamSelect} onChange={handleTeamChange}>
+                <option value="all">All teams</option>
+                {teams.map(renderTeams)}
+            </select>
             <div className="mw6 center">
-                <canvas ref={canvasRef} id="graph" height="400"></canvas>
+                <Radar data={chartData}/>
             </div>
         </div>
     );

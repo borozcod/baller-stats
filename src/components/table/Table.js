@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import StatsContext from './../../context/stats-context';
+import Filters from './../filters/Filters';
 import _ from 'lodash';
 import './Table.css';
 
@@ -39,6 +40,7 @@ const Table = () => {
     return (
         <div className="mh4-ns mh2 mb5">
             <div className="relative">
+                <Filters />
                 <table className="table">
                     <tbody>
                         <tr className="black pv2"><td>Scroll to see more ---></td></tr>
