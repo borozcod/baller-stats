@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Table  from "./../components/table/Table";
 import Graph  from "./../components/graph/Graph";
-import Filters from "./../components/filters/Filters"
 import './Home.css';
 
 const Home = () => {
@@ -9,7 +8,6 @@ const Home = () => {
 
     return (
         <div className="tc">
-            <Filters />
             <div className="mv3">
                 <button className={`${tab === 'table' && 'b--light-purple bb'} bw2 mr2`} onClick={() => {setTab('table')}}>Table</button>
                 <button className={`${tab === 'graph' && 'b--light-purple bb'} bw2 ml2`} onClick={() => {setTab('graph')}}>Graph</button>
