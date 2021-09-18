@@ -9,8 +9,8 @@ const Home = () => {
     return (
         <div className="tc">
             <div className="mv3">
-                <button className={`${tab === 'table' && 'b--light-purple bb'} bw2 mr2`} onClick={() => {setTab('table')}}>Table</button>
-                <button className={`${tab === 'graph' && 'b--light-purple bb'} bw2 ml2`} onClick={() => {setTab('graph')}}>Graph</button>
+                <button className={`${tab !== 'table' && 'o-50'} bg-light-blue br2 bw1 b--dark-blue mr2 link`} onClick={() => {setTab('table')}}><i className="fas fa-table mr1"></i>Table</button>
+                <button className={`${tab !== 'graph' && 'o-50'} bg-light-blue br2 bw1 b--dark-blue ml2 link`} onClick={() => {setTab('graph')}}><i class="fas fa-bullseye mr1"></i>Graph</button>
             </div>
             <div className={`${(tab === 'table')? 'db': 'dn'}`}>
                 <Table />

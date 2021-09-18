@@ -32,7 +32,7 @@ const Table = () => {
         const values = _.map(filteredData);
         return <tr key={`tr-${i}`} className={`pv2 ${(i % 2 === 0) && 'bg-lightest-blue'}`}>{
                     values.map((value, i) => {
-                        return <td key={`td-${i}`}><span className="db ml2 black">{value}</span></td>
+                        return <td key={`td-${i}`}><span className={`db ml2 black`} >{value}</span></td>
                     })
                 }</tr>
     }
