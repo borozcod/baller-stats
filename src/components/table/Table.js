@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import StatsContext from './../../context/stats-context';
 import Filters from './../filters/Filters';
 import _ from 'lodash';
@@ -7,11 +7,58 @@ import './Table.css';
 const Table = () => {
 
     const {
-        stats
+        stats,
+        setStats
     } = useContext(StatsContext);
+
+    const [sortBy, setSortBy] = useState('last');
+    const [order, setOrder] = useState('desc');
 
     const headers = _.keys(stats[0]);
     const rows = stats;
+
+    let stringFields = [
+        "first",
+        "last"
+    ]
+
+    let percentFields = [
+        "fg%",
+        "3pt%",
+        "ft%"
+    ]
+
+    const sortTable = (sortByKey) => {
+
+        var orderBy;
+
+        // change filter
+        if( sortByKey !== sortBy ) {
+            orderBy = "desc";
+        } else {
+            var orderBy = (order == "asc") ? "desc" : "asc";
+        }
+
+        setOrder(orderBy)
+        setSortBy(sortByKey);
+
+        if(_.indexOf(stringFields, sortByKey) > -1) {
+            const sortedStringTable = _.orderBy(stats, [function(o) { return o[sortByKey]; }], orderBy);
+            setStats(sortedStringTable);
+            return;
+        }
+
+        if(_.indexOf(percentFields, sortByKey) > -1) {
+            const sortField =  sortByKey.replace(/%/g,"-percent")
+            const sortedStringTable = _.orderBy(stats, [function(o) { return parseFloat(o[sortField]); }], orderBy);
+            setStats(sortedStringTable);
+            return;
+        }
+
+        const sortedTable = _.orderBy(stats, [function(o) { return parseFloat(o[sortByKey]); }], orderBy);
+        setStats(sortedTable);
+        return;
+    }
 
     const renderHeaders = (value, i) => {
         if(!value){
@@ -23,7 +70,11 @@ const Table = () => {
         }
 
         return(
-            <th className="dib" key={i}><span className="db ml2 white">{value}</span></th>
+            <th className="dib" key={i}>
+                <button className="button" onClick={() => sortTable(value)}>
+                    <span className="db ml2 white">{value}<span className={`ml2 dib ${(order == 'asc' && sortBy == value) && 'rotate-180 pb1'} ${sortBy !== value && 'o-50'}`}><i className="fas fa-sort-down"></i></span></span>
+                </button>
+            </th>
         );
     }
 

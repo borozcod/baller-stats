@@ -45,3 +45,10 @@ h1 {
 p {
   color: #f3ec60;
 }
+
+
+.button {
+    padding: 0;
+    border: 0;
+    background: none;
+}
