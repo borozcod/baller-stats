@@ -51,4 +51,5 @@ p {
     padding: 0;
     border: 0;
     background: none;
+    -webkit-appearance: none;
 }
