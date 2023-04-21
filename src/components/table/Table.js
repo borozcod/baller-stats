@@ -71,7 +71,7 @@ const Table = () => {
 
         return(
             <th className="dib" key={i}>
-                <button className="button" onClick={() => sortTable(value)}>
+                <button className="button ml0" onClick={() => sortTable(value)}>
                     <span className="db ml2 white">{value}<span className={`ml2 dib ${(order == 'asc' && sortBy == value) && 'rotate-180 pb1'} ${sortBy !== value && 'o-50'}`}><i className="fas fa-sort-down"></i></span></span>
                 </button>
             </th>
