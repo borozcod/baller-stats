@@ -3,7 +3,7 @@ Baller Stats &middot; [![ballin?](https://img.shields.io/badge/are%20we%20ballin
 =====
 A dashboard for displaying your team's basketball data.
 
-## Running it locally
+## Running it locally 
 
 > NOTE: Baller stats requires an api from where the data is read. [Baller Stats Parser](https://github.com/borozcod/baller-stats-parser) is a script that will generate a json output from a google sheet. The output from the parser is what is used as the api.
 
